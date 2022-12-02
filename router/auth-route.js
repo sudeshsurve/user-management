@@ -57,6 +57,7 @@ router.post('/login', async (req, res) => {
         res.status(200).json({token})
     } catch (error) {
         return res.status(400).json({ msg: "something went Wrong" })
+        // this is s1 branch
     }
 })
 
