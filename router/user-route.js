@@ -18,7 +18,6 @@ try {
 } catch (error) {
   if (error.name === "ValidationError") {
     let errors = {};
-
     Object.keys(error.errors).forEach((key) => {
         errors[key] = error.errors[key].message;
     });

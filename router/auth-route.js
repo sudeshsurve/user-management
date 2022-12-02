@@ -1,6 +1,9 @@
 const router = require('express').Router()
 const signup_DB = require('../models/auth_Sign_up');
+const users_data = require('../models/user-model')
 const JWT = require('jsonwebtoken')
+
+
 
 
 router.post("/sign-up", async (req, res) => {
@@ -39,7 +42,7 @@ router.post('/login', async (req, res) => {
     try {
         const email = req.body.email
         const password = req.body.password
-        const user = await signup_DB.findOne({ email })
+        const user = await users_data.findOne({ email })
         console.log(user.password);
         if (!user) {
             return res.status(400).json({
@@ -56,7 +59,6 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         return res.status(400).json({ msg: "something went Wrong" })
     }
-
 })
 
 
