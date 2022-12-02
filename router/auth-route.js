@@ -52,6 +52,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({
                 msg: "invalid cradintial"
                 // this is s2 commit
+                // test1 branch 
             })
         }
         const token = await JWT.sign({role :"admin"},"dfdjdfdffdlfdo" ,{expiresIn:39399})
