@@ -34,7 +34,6 @@ router.post("/sign-up", async (req, res) => {
         }
         res.status(500).send("Something went wrong");
     }
-
 });
 
 
