@@ -2,7 +2,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 const Sign_up_Schema = new mongoose.Schema({
-      name: {
+      username: {
             type: String,
             requried: [true, "Name is required filed"],
             trim: true,

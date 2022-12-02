@@ -7,7 +7,7 @@ const userSchema = new Schema({
         type: String,
         trim: true,
         lowercase: true,
-        requried:[true, "Name is required"]
+        requried: [true, "Name is required"]
     },
     email: {
         type: String,
@@ -20,7 +20,23 @@ const userSchema = new Schema({
             }
         }
     },
-    role: { 
+    password: {
+        type: String,
+        required: [true, "Password is a required field"],
+        trim: true,
+        validate(value) {
+            if (!validator.isLength(value, { min: 6, max: 1000 })) {
+                throw Error("Length of the password should be between 6-1000");
+            }
+
+            if (value.toLowerCase().includes("password")) {
+                throw Error(
+                    'The password should not contain the keyword "password"!'
+                );
+            }
+        },
+    },
+    role: {
         type: String,
         required: [true, "role is a required field"],
         trim: true,
@@ -37,4 +53,4 @@ const userSchema = new Schema({
         required: [true, "Age is a required field"],
     },
 }, { versionKey: false })
-module.exports  = mongoose.model("user", userSchema)
+module.exports = mongoose.model("user", userSchema)
