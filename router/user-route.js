@@ -1,16 +1,13 @@
 const router = require('express').Router()
 const usermodule = require('../models/user-model')
-
-
-
 router.post('/user_post' , async(req , res)=>{
 try {
-  const {username , email , password , role , city , age } = req.body
+  const {username , email , password , role , city , age , gender} = req.body
     const userExist = await usermodule.findOne({email:email})
    if(userExist){
       return res.status(400).json({message:"user is already exist"})
    }
-     let userdata =  new usermodule({username:username , email:email , password:password , role:role , age:age , city:city})
+     let userdata =  new usermodule({username:username , email:email , password:password , role:role , age:age , city:city , gender:gender})
      const result = await userdata.save()
      console.log(result);
      res.status(200).json(result)
@@ -26,4 +23,15 @@ try {
 res.status(500).send("Something went wrong");
 }
 })
+
+router.get('/all-user' , async(req , res)=>{
+  try {
+    const result = await usermodule.find()
+  res.json(result)
+  } catch (error) {
+    
+    res.status(400).json('something went wrong')
+  }
+})
+
 module.exports = router

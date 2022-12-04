@@ -3,7 +3,7 @@ const validator = require('validator')
 
 const Schema = mongoose.Schema
 const userSchema = new Schema({
-    name: {
+    username: {
         type: String,
         trim: true,
         lowercase: true,
@@ -45,6 +45,12 @@ const userSchema = new Schema({
     city: {
         type: String,
         required: [true, "city is a required field"],
+        trim: true,
+        lowercase: true
+    },
+    gender: {
+        type: String,
+        required: [true, "gender is a required field"],
         trim: true,
         lowercase: true
     },

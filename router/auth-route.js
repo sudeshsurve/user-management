@@ -8,9 +8,6 @@ const JWT = require('jsonwebtoken')
 
 router.post("/sign-up", async (req, res) => {
     try {
-        // const email = req.body.email
-        // const password = req.body.password
-        // const name = req.body.name
   const {email , password , name } = req.body
         const userExist = await signup_DB.findOne({ email })
         if (userExist) {
@@ -42,7 +39,7 @@ router.post('/login', async (req, res) => {
         const email = req.body.email
         const password = req.body.password
         const user = await users_data.findOne({ email })
-        console.log(user.password);
+        console.log(user);
         if (!user) {
             return res.status(400).json({
                 msg: "invalid cradintial"
@@ -55,7 +52,7 @@ router.post('/login', async (req, res) => {
                 // test1 branch 
             })
         }
-        const token = await JWT.sign({role :"admin"},"dfdjdfdffdlfdo" ,{expiresIn:39399})
+        const token = await JWT.sign({role :user.role, username : user.username},"dfdjdfdffdlfdo" ,{expiresIn:39399})
         res.status(200).json({token})
     } catch (error) {
         return res.status(400).json({ msg: "something went Wrong" })
