@@ -33,6 +33,10 @@ const  exoenseSchema = new mongoose.Schema({
         require:[true , "approve is Required Feild"],
         default:false
       },
+      userID:{
+        type:String,
+        require:[true , "UserID is Required Feild"],
+      }
 
     // { date : '3 Apr 19', head : 'Food', amount : 10, paid_to : 'Wada Pav Wala', username : 'shubham', approved:true },
   

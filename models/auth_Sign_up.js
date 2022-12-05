@@ -5,6 +5,7 @@ const Sign_up_Schema = new mongoose.Schema({
       username: {
             type: String,
             requried: [true, "Name is required filed"],
+            unique : true ,
             trim: true,
             lowercase: true,
         },

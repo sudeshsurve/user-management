@@ -16,13 +16,10 @@ router.post("/sign-up", async (req, res) => {
         var user = new signup_DB({ email: email, password: password, name: name })
         const result = await user.save();
         console.log(result);
-
-        return res.status(200).send(result);
+         res.status(200).send(result);
     } catch (error) {
-
         if (error.name === "ValidationError") {
             let errors = {};
-
             Object.keys(error.errors).forEach((key) => {
                 errors[key] = error.errors[key].message;
             });
@@ -39,7 +36,6 @@ router.post('/login', async (req, res) => {
         const email = req.body.email
         const password = req.body.password
         const user = await users_data.findOne({ email })
-        console.log(user);
         if (!user) {
             return res.status(400).json({
                 msg: "invalid cradintial"
@@ -52,7 +48,8 @@ router.post('/login', async (req, res) => {
                 // test1 branch 
             })
         }
-        const token = await JWT.sign({role :user.role, username : user.username},"dfdjdfdffdlfdo" ,{expiresIn:39399})
+        console.log(user._id.toString());
+        const token = await JWT.sign({role :user.role, username : user.username , userID :user._id.toString()},"dfdjdfdffdlfdo" ,{expiresIn:39399})
         res.status(200).json({token})
     } catch (error) {
         return res.status(400).json({ msg: "something went Wrong" })

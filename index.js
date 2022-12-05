@@ -10,7 +10,7 @@ app.use(cors())
 const URL = 'mongodb://127.0.0.1/user-management'
 app.use(body_parser.json())
 app.use('/user' , router)
-app.use('/api' , authRouter)
+app.use('/api' , authRouter)    
 app.use('/exp' , expenese)
 
 mongoose.connect(URL ,(err)=>{

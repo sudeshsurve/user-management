@@ -4,9 +4,12 @@ router.post('/user_post' , async(req , res)=>{
 try {
   const {username , email , password , role , city , age , gender} = req.body
     const userExist = await usermodule.findOne({email:email})
-   if(userExist){
+    const usernameExist = await usermodule.findOne({username : username})
+    // console.log(userExist);
+   if(userExist || usernameExist){
       return res.status(400).json({message:"user is already exist"})
    }
+      
      let userdata =  new usermodule({username:username , email:email , password:password , role:role , age:age , city:city , gender:gender})
      const result = await userdata.save()
      console.log(result);
