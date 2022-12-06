@@ -42,18 +42,24 @@ expense.get('/user-expense', async (req, res) => {
 
 expense.get('/totla-expense-report', async (req, res) => {
     try {
-        const result = await exp.find({ approved: false })
-        if (result.length < 1) {
+        const result = await exp.find({ approved: true })
+        if (result.length > 1) {
             return res.status(200).json({
                 message: 'no data found'
             })
         }
         res.status(200).json(result)
     } catch (error) {
+        if (error.name === "ValidationError") {
+            let errors = {};
+            Object.keys(error.errors).forEach((key) => {
+                errors[key] = error.errors[key].message;
+            });
 
+            return res.status(400).send(errors);
+        }
         res.status(400).json("something went wrong")
     }
-
 
 })
 
@@ -70,14 +76,18 @@ expense.put('/approve/:id', async (req, res) => {
     // console.log(data);
 })
 
-// expense.get('/totla-expense-report', async (req, res) => {
-//     try {
-//     const result = await exp.find({approved:true})
-//     } catch (error) {
-
-//     }
-
-// })
+expense.get('/exp-list', async (req, res) => {
+    try {
+    const  result = await exp.find({approved:false})
+    if(result.length < 1){
+        return res.status(200).json({message :"no data avilabel"})
+    }
+      res.status(200).json(result)
+    } catch (error) {
+    }
+    res.status(401).json("something went wrong")
+  
+})
 
 
 
