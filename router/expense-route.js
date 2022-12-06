@@ -46,7 +46,7 @@ expense.get('/totla-expense-report', async (req, res) => {
         if (result.length < 1) {
             return res.status(200).json({
                 message: 'no data found'
-            })
+            })  
         }
         res.status(200).json(result)
     } catch (error) {
@@ -94,18 +94,7 @@ expense.put('/approve/:id', async (req, res) => {
     // console.log(data);
 })
 
-expense.get('/exp-list', async (req, res) => {
-    try {
-    const  result = await exp.find({approved:false})
-    if(result.length < 1){
-        return res.status(200).json({message :"no data avilabel"})
-    }
-      res.status(200).json(result)
-    } catch (error) {
-    }
-    res.status(401).json("something went wrong")
-  
-})
+
 
 
 

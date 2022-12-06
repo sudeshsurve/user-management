@@ -48,6 +48,12 @@ const userSchema = new Schema({
         trim: true,
         lowercase: true
     },
+    state: {
+        type: String,
+        required: [true, "state is a required field"],
+        trim: true,
+        lowercase: true
+    },
     gender: {
         type: String,
         required: [true, "gender is a required field"],
